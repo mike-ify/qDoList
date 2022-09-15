@@ -48,13 +48,19 @@ public class ToDoListService {
         return toDoLists;
     }
 
-
     @PATCH
     @Path("/state")
     public ToDoList toggleStatus(ToDoList element) {
-
-        return toDoLists.stream()
-        .filter(value -> value.getTitle().equals(element.getTitle()))
-        .findFirst().get().toggleStatus();
+        return findByTitle(element.getTitle()).toggleStatus();
     }
+
+    @GET
+    @Path("/{title}")
+    public ToDoList findByTitle(@PathParam("title") String title) {
+        System.out.println(title);
+        return toDoLists.stream()
+        .filter(value -> value.getTitle().equals(title))
+        .findFirst().get();
+    }
+
 }
