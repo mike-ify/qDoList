@@ -2,15 +2,10 @@ package org.example.service;
 
 import org.example.model.ToDoList;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Path("/to-do-list")
@@ -51,5 +46,15 @@ public class ToDoListService {
             }
         });
         return toDoLists;
+    }
+
+
+    @PATCH
+    @Path("/state")
+    public ToDoList toggleStatus(ToDoList element) {
+
+        return toDoLists.stream()
+        .filter(value -> value.getTitle().equals(element.getTitle()))
+        .findFirst().get().toggleStatus();
     }
 }

@@ -17,13 +17,26 @@ public class ToDoList {
         setStatusIncomplete();
     }
 
-    public ToDoList setStatusDone(){
-        status = Status.DONE;
+    public ToDoList toggleStatus(){
+        switch (status){
+            case DONE:
+                setStatusIncomplete();
+                break;
+            case INCOMPLETE:
+                setStatusDone();
+                break;
+        }
+
         return this;
     }
 
     public ToDoList setStatusIncomplete(){
         status = Status.INCOMPLETE;
+        return this;
+    }
+
+    public ToDoList setStatusDone(){
+        status = Status.DONE;
         return this;
     }
 }
